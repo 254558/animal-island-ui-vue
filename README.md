@@ -17,6 +17,14 @@
 npm install animal-island-ui-vue
 ```
 
+也可以从 GitHub Packages 安装 scoped 包：
+
+```bash
+npm login --scope=@yanstu --auth-type=legacy --registry=https://npm.pkg.github.com
+npm config set @yanstu:registry https://npm.pkg.github.com
+npm install @yanstu/animal-island-ui-vue
+```
+
 ## 快速开始
 
 ```ts
@@ -25,6 +33,12 @@ import App from './App.vue';
 import AnimalIslandUIVue from 'animal-island-ui-vue';
 
 createApp(App).use(AnimalIslandUIVue).mount('#app');
+```
+
+GitHub Packages 对应的导入路径为：
+
+```ts
+import AnimalIslandUIVue from '@yanstu/animal-island-ui-vue';
 ```
 
 ## 按需使用

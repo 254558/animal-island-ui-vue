@@ -1,0 +1,72 @@
+name: Publish GitHub Package
+
+on:
+    workflow_dispatch:
+    release:
+        types:
+            - published
+
+permissions:
+    contents: read
+    packages: write
+
+jobs:
+    publish:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+                  registry-url: https://npm.pkg.github.com
+                  scope: '@yanstu'
+
+            - name: Install dependencies
+              run: npm install
+
+            - name: Test
+              run: npm test
+
+            - name: Build package
+              run: npm run build
+
+            - name: Prepare scoped package
+              run: |
+                  mkdir -p .github-package/extracted
+                  npm pack --pack-destination .github-package
+                  tar -xzf .github-package/animal-island-ui-vue-*.tgz -C .github-package/extracted
+                  node <<'NODE'
+                  const fs = require('node:fs');
+                  const manifestPath = '.github-package/extracted/package/package.json';
+                  const pkg = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+
+                  pkg.name = '@yanstu/animal-island-ui-vue';
+                  pkg.repository = {
+                      type: 'git',
+                      url: 'git+https://github.com/yanstu/animal-island-ui-vue.git',
+                  };
+                  pkg.publishConfig = {
+                      registry: 'https://npm.pkg.github.com',
+                  };
+                  if (pkg.scripts) {
+                      delete pkg.scripts.prepublishOnly;
+                  }
+
+                  fs.writeFileSync(manifestPath, `${JSON.stringify(pkg, null, 4)}\n`);
+                  NODE
+
+            - name: Publish to GitHub Packages
+              working-directory: .github-package/extracted/package
+              run: |
+                  VERSION=$(node -p "require('./package.json').version")
+                  if npm view "@yanstu/animal-island-ui-vue@$VERSION" version --registry=https://npm.pkg.github.com >/dev/null 2>&1; then
+                      echo "@yanstu/animal-island-ui-vue@$VERSION already exists on GitHub Packages."
+                      exit 0
+                  fi
+                  npm publish --registry=https://npm.pkg.github.com
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

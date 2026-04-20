@@ -8,11 +8,22 @@
     box-sizing: border-box;
 }
 
-[class^='animal-'] {
+body {
     font-family: var(--animal-font-family);
     font-size: var(--animal-font-size-base);
     line-height: var(--animal-line-height-base);
     color: var(--animal-text-color);
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+    color: inherit;
+}
+
+[class^='animal-'] {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }

@@ -38,6 +38,12 @@
         "build": "vite build && vue-tsc --project tsconfig.build.json --declaration --emitDeclarationOnly",
         "build:demo": "vite build --config vite.config.demo.ts",
         "test": "vitest run",
+        "release": "node scripts/release.mjs",
+        "release:verify": "node scripts/release.mjs verify",
+        "release:repo-details": "node scripts/release.mjs repo-details",
+        "release:netlify": "node scripts/release.mjs netlify",
+        "release:github-package": "node scripts/release.mjs github-package",
+        "release:full": "node scripts/release.mjs full",
         "prepublishOnly": "npm run build"
     },
     "peerDependencies": {

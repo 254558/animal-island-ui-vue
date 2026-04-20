@@ -76,7 +76,7 @@ const isHomePage = computed(() => activeKey.value === 'home');
         v-if="isHomePage"
         class="layout layout-home"
         data-page="home"
-        :style="{ background: `url(${homeBgUrl}) center top / auto 100% repeat-y, #7DC395` }"
+        :style="{ background: `url(${homeBgUrl}) center/cover no-repeat, #7DC395` }"
     >
         <HomePage @navigate="navigate" />
     </div>

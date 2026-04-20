@@ -68,11 +68,11 @@ describe('Demo App routing shell', () => {
         expect(wrapper.find('.layout-home').attributes('data-page')).toBe('home');
     });
 
-    it('uses a non-cover home background declaration so the artwork keeps the original proportions', async () => {
+    it('matches the react demo home background declaration with cover rendering', async () => {
         const { readFileSync } = await import('node:fs');
         const source = readFileSync(resolve(process.cwd(), 'demo/App.vue'), 'utf8');
 
-        expect(source).toContain('center top / auto 100% repeat-y');
+        expect(source).toContain('center/cover no-repeat, #7DC395');
     });
 
     it('keeps the documentation shell inside a cursor wrapper with demo cursor settings', async () => {

@@ -75,6 +75,13 @@ describe('Demo App routing shell', () => {
         expect(source).toContain('center/cover no-repeat, #7DC395');
     });
 
+    it('loads library global styles from the demo entry so production keeps design tokens', async () => {
+        const { readFileSync } = await import('node:fs');
+        const source = readFileSync(resolve(process.cwd(), 'demo/main.ts'), 'utf8');
+
+        expect(source).toContain("import '../src/styles/index.less';");
+    });
+
     it('keeps the documentation shell inside a cursor wrapper with demo cursor settings', async () => {
         window.location.hash = '#/button';
 

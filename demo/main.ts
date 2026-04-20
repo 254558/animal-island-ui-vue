@@ -1,4 +1,5 @@
 import { createApp } from 'vue';
+import '../src/styles/index.less';
 import App from './App.vue';
 import cursorIcon from '../src/components/Cursor/cursor-icon.png';
 import faviconIcon from './img/animal_icon.svg';

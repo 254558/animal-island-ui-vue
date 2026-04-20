@@ -2,6 +2,9 @@
 
 一套基于 Vue 3、TypeScript 与 Vite 的 Animal 风格组件库。
 
+- GitHub: https://github.com/yanstu/animal-island-ui-vue
+- 在线预览: https://animal-island-ui-vue.netlify.app
+
 ## 介绍
 
 `animal-island-ui-vue` 面向内容展示、活动页面、社区互动页与轻量业务页面，提供统一的圆润轮廓、温暖配色、柔和动效与可复用组件语义。
@@ -150,4 +153,4 @@ MIT
 
 ## 致谢
 
-本项目基于 [guokaigdg/animal-island-ui](https://github.com/guokaigdg/animal-island-ui) 重构为Vue版本。
+感谢开源项目 [guokaigdg/animal-island-ui](https://github.com/guokaigdg/animal-island-ui) 提供的风格灵感与界面参考。

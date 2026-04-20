@@ -28,7 +28,7 @@
     "bugs": {
         "url": "https://github.com/yanstu/animal-island-ui-vue/issues"
     },
-    "homepage": "https://github.com/yanstu/animal-island-ui-vue",
+    "homepage": "https://animal-island-ui-vue.netlify.app",
     "publishConfig": {
         "access": "public",
         "registry": "https://registry.npmjs.org/"

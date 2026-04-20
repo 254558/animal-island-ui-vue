@@ -23,7 +23,7 @@
     "author": "yanstu",
     "repository": {
         "type": "git",
-        "url": "https://github.com/yanstu/animal-island-ui-vue.git"
+        "url": "git+https://github.com/yanstu/animal-island-ui-vue.git"
     },
     "bugs": {
         "url": "https://github.com/yanstu/animal-island-ui-vue/issues"

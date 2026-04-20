@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
+    buildNetlifyDeployStatusUrl,
+    buildNetlifyDeployUrl,
     DEFAULT_REPO_DETAILS,
     getReleaseLabel,
     parseRepoSlug,
@@ -49,6 +51,29 @@ describe('release lib', () => {
         expect(
             getReleaseLabel({ version: '0.1.0', sha: '6d95a6e' })
         ).toBe('animal-island-ui-vue@0.1.0-sha-6d95a6e');
+    });
+
+    it('builds a production netlify deploy url with title', () => {
+        const url = new URL(
+            buildNetlifyDeployUrl({
+                siteId: 'site-123',
+                production: true,
+                title: 'animal-island-ui-vue@0.1.0',
+            })
+        );
+
+        expect(url.origin).toBe('https://api.netlify.com');
+        expect(url.pathname).toBe('/api/v1/sites/site-123/deploys');
+        expect(url.searchParams.get('production')).toBe('true');
+        expect(url.searchParams.get('title')).toBe(
+            'animal-island-ui-vue@0.1.0'
+        );
+    });
+
+    it('builds a netlify deploy status url', () => {
+        expect(buildNetlifyDeployStatusUrl('deploy-123')).toBe(
+            'https://api.netlify.com/api/v1/deploys/deploy-123'
+        );
     });
 
     it('ships chinese animal-crossing flavored repo details defaults', () => {

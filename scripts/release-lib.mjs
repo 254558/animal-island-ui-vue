@@ -61,3 +61,24 @@ export function resolveNetlifySiteId({
 export function getReleaseLabel({ version, sha }) {
     return `animal-island-ui-vue@${version}-sha-${sha}`;
 }
+
+export function buildNetlifyDeployUrl({
+    siteId,
+    production = true,
+    title,
+}) {
+    const url = new URL(
+        `https://api.netlify.com/api/v1/sites/${siteId}/deploys`
+    );
+    url.searchParams.set('production', String(production));
+
+    if (title) {
+        url.searchParams.set('title', title);
+    }
+
+    return url.toString();
+}
+
+export function buildNetlifyDeployStatusUrl(deployId) {
+    return `https://api.netlify.com/api/v1/deploys/${deployId}`;
+}

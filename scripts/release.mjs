@@ -1,9 +1,16 @@
 #!/usr/bin/env node
 
 import { execFileSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import {
+    existsSync,
+    mkdirSync,
+    readFileSync,
+    rmSync,
+} from 'node:fs';
 import { resolve } from 'node:path';
 import {
+    buildNetlifyDeployStatusUrl,
+    buildNetlifyDeployUrl,
     DEFAULT_REPO_DETAILS,
     getReleaseLabel,
     parseRepoSlug,
@@ -55,12 +62,34 @@ function getStdout(command, commandArgs) {
     }).trim();
 }
 
+function getStdoutInheritEnv(command, commandArgs) {
+    return execFileSync(command, commandArgs, {
+        cwd,
+        encoding: 'utf8',
+        shell: useWindowsShell && /^(npm|npx)$/i.test(command),
+        env: {
+            ...process.env,
+            CURL_CA_BUNDLE: process.env.CURL_CA_BUNDLE ?? '',
+        },
+    }).trim();
+}
+
 function requireEnv(name) {
     const value = process.env[name];
     if (!value) {
         throw new Error(`缺少环境变量 ${name}`);
     }
     return value;
+}
+
+function ensureDir(dirPath) {
+    mkdirSync(dirPath, { recursive: true });
+}
+
+function removeIfExists(targetPath) {
+    if (existsSync(targetPath)) {
+        rmSync(targetPath, { force: true, recursive: true });
+    }
 }
 
 async function requestJson(url, options = {}) {
@@ -91,32 +120,48 @@ async function deployNetlify() {
     const siteId = resolveNetlifySiteId({ cwd });
     const sha = getStdout('git', ['rev-parse', '--short', 'HEAD']);
     const releaseLabel = getReleaseLabel({ version: packageJson.version, sha });
-    const branch = getStdout('git', ['branch', '--show-current']);
+    const releaseDir = resolve(cwd, '.release');
+    const zipPath = resolve(releaseDir, `${releaseLabel}.zip`);
 
     verify();
 
-    if (branch !== 'main') {
-        throw new Error(`Netlify 发布仅允许在 main 执行，当前分支：${branch}`);
-    }
+    ensureDir(releaseDir);
+    removeIfExists(zipPath);
 
-    const siteBefore = await requestJson(
-        `https://api.netlify.com/api/v1/sites/${siteId}`,
-        {
-            headers: {
-                Authorization: `Bearer ${authToken}`,
-                Accept: 'application/json',
-            },
-        }
+    run('powershell', [
+        '-NoProfile',
+        '-Command',
+        `Compress-Archive -Path 'demo-dist\\*' -DestinationPath '${zipPath.replace(/'/g, "''")}' -Force`,
+    ]);
+
+    const deploy = JSON.parse(
+        getStdoutInheritEnv(curlCommand, [
+            '-sS',
+            '--fail-with-body',
+            '-X',
+            'POST',
+            '-H',
+            `Authorization: Bearer ${authToken}`,
+            '-H',
+            'Content-Type: application/zip',
+            '--data-binary',
+            `@${zipPath}`,
+            buildNetlifyDeployUrl({
+                siteId,
+                production: true,
+                title: releaseLabel,
+            }),
+        ])
     );
-    const previousDeployId = siteBefore.published_deploy?.id ?? null;
-
-    console.log(`准备推送 main，发布标签：${releaseLabel}`);
-    run('git', ['push', 'origin', 'main']);
+    const pendingDeployId = deploy.id ?? deploy.deploy_id;
+    if (!pendingDeployId) {
+        throw new Error(`Netlify 返回缺少 deploy id: ${JSON.stringify(deploy)}`);
+    }
 
     const maxAttempts = 40;
     for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
         const current = await requestJson(
-            `https://api.netlify.com/api/v1/sites/${siteId}`,
+            buildNetlifyDeployStatusUrl(pendingDeployId),
             {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
@@ -124,29 +169,24 @@ async function deployNetlify() {
                 },
             }
         );
-        const publishedDeploy = current.published_deploy;
-        const deployId = publishedDeploy?.id ?? current.deploy_id ?? 'unknown';
-        const state = publishedDeploy?.state ?? current.state ?? 'unknown';
-        const title = publishedDeploy?.title ?? '';
+        const state = current.state ?? current.deploy_state ?? 'unknown';
 
         console.log(
-            `Netlify deploy ${deployId} 状态：${state} (${attempt}/${maxAttempts})${title ? ` / ${title}` : ''}`
+            `Netlify deploy ${pendingDeployId} 状态：${state} (${attempt}/${maxAttempts})`
         );
 
-        if (deployId !== previousDeployId && state === 'ready') {
+        if (state === 'ready') {
             console.log(
-                `Netlify 已发布：${publishedDeploy?.ssl_url ?? current.ssl_url ?? current.url ?? DEFAULT_REPO_DETAILS.homepage}`
+                `Netlify 已发布：${current.ssl_url ?? current.url ?? DEFAULT_REPO_DETAILS.homepage}`
             );
             return;
         }
 
         if (state === 'error' || state === 'failed') {
-            throw new Error(
-                `Netlify 部署失败：${JSON.stringify(publishedDeploy ?? current)}`
-            );
+            throw new Error(`Netlify 部署失败：${JSON.stringify(current)}`);
         }
 
-        sleep(5000);
+        sleep(3000);
     }
 
     throw new Error('Netlify 部署等待超时，请到站点控制台查看最新构建。');

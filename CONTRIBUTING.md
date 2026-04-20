@@ -1,6 +1,6 @@
-# Contributing to animal-island-ui-vue
+# Contributing to Animal Island UI Vue
 
-感谢你关注 `animal-island-ui-vue`，欢迎提交 Issue 和 Pull Request。
+感谢你的关注！欢迎通过 Issue 反馈问题或提交 Pull Request 参与贡献。
 
 ## 提交 Issue
 
@@ -62,26 +62,11 @@ tests/
 
 ## 设计令牌
 
-组件库通过 CSS 自定义属性支持主题覆盖，常用变量包括：
+组件库通过 CSS 自定义属性支持主题覆盖，常用变量与覆盖示例请参考 [README.md](./README.md) 中的快速上手一节。
 
-- `--animal-primary-color`
-- `--animal-text-color`
-- `--animal-bg-color`
-- `--animal-border-color`
-- `--animal-border-radius-base`
-- `--animal-shadow-base`
-- `--animal-spacing-md`
-- `--animal-motion-duration-base`
+## 致谢
 
-覆盖示例：
-
-```css
-:root {
-    --animal-primary-color: #19c8b9;
-    --animal-text-color: #827157;
-    --animal-bg-color: #f8f8f0;
-}
-```
+感谢开源项目 [guokaigdg/animal-island-ui](https://github.com/guokaigdg/animal-island-ui) 提供的风格灵感与界面参考。
 
 ## License
 

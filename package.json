@@ -1,7 +1,7 @@
 {
     "name": "animal-island-ui-vue",
     "version": "0.1.0",
-    "description": "A nature-inspired Vue 3 component library — Button, Input, Switch, Modal, Card, Collapse, Cursor, Divider",
+    "description": "Animal Island 风格的 Vue 3 组件库，提供 30 个开箱即用的温暖质感组件，基于 TypeScript + Vite 构建",
     "type": "module",
     "main": "dist/cjs/index.cjs",
     "module": "dist/es/index.js",
@@ -70,7 +70,9 @@
         "typescript",
         "theme",
         "animal-island-ui-vue",
-        "nature"
+        "animal-island",
+        "nature",
+        "warm"
     ],
     "license": "MIT"
 }

@@ -85,7 +85,7 @@ export const docsMap: Record<string, ComponentDoc> = {
                 '适合活动页、社区页、轻内容产品、用户成长页以及需要温和亲和感的后台前台混合场景。'
             ),
             section('本项目仓库', '这里可以查看当前组件库的项目地址、版本更新与文档演示。'),
-            section('致谢', '本项目基于该项目重构为Vue版本。'),
+            section('致谢', '本项目参考 guokaigdg/animal-island-ui 的风格设计，在此致谢。'),
         ],
     },
     'quick-start': {
@@ -146,9 +146,9 @@ export const docsMap: Record<string, ComponentDoc> = {
         sections: [
             section('基础用法', '支持 v-model、受控写法和禁用状态。', `<Checkbox v-model="checked">接收岛屿广播</Checkbox>
 <Checkbox disabled>暂不可选</Checkbox>`, [
-                row('modelValue', '勾选状态', 'boolean'),
-                row('checked', '兼容受控值', 'boolean'),
-                row('defaultChecked', '默认勾选', 'boolean', 'false'),
+                row('modelValue', '勾选状态（受控）', 'boolean'),
+                row('checked', '受控兼容值', 'boolean'),
+                row('defaultChecked', '默认勾选（非受控）', 'boolean', 'false'),
                 row('disabled', '禁用状态', 'boolean', 'false'),
             ]),
         ],
@@ -194,7 +194,7 @@ export const docsMap: Record<string, ComponentDoc> = {
     },
     form: {
         title: 'Form 表单',
-        desc: '适合作为输入区域骨架，统一垂直或行内布局。',
+        desc: '适合作为表单容器，统一垂直或行内布局。',
         sections: [
             section('基础用法', '与 FormItem 组合使用可以更稳定地组织输入项。', `<Form layout="vertical">
   <FormItem label="活动名称">
@@ -223,9 +223,9 @@ export const docsMap: Record<string, ComponentDoc> = {
             section('基础用法', '支持前后缀、清空、不同尺寸和状态提示。', `<Input v-model="keyword" allow-clear placeholder="搜索岛屿活动">
   <template #prefix>🔍</template>
 </Input>`, [
-                row('modelValue', '推荐值绑定', 'string'),
-                row('value', '兼容受控值', 'string'),
-                row('defaultValue', '默认值', 'string'),
+                row('modelValue', '当前值（受控）', 'string'),
+                row('value', '受控兼容值', 'string'),
+                row('defaultValue', '默认初始值', 'string'),
                 row('size', '尺寸', `'small' | 'middle' | 'large'`, `'middle'`),
                 row('prefix', '前缀内容', 'string'),
                 row('suffix', '后缀内容', 'string'),
@@ -249,7 +249,7 @@ export const docsMap: Record<string, ComponentDoc> = {
         title: 'Message 全局提示',
         desc: '适合页面顶部的小型提醒或任务反馈。',
         sections: [
-            section('基础用法', '支持默认、成功和提醒三种状态。', `<Message content="今天的岛屿开放时间已更新" />
+            section('基础用法', '支持默认、成功与警告三种状态。', `<Message content="今天的岛屿开放时间已更新" />
 <Message type="success" content="烟火大会布置已保存" />
 <Message type="warning" content="还有 2 项设置未完成" />`, [
                 row('content', '提示内容', 'string'),
@@ -307,7 +307,7 @@ export const docsMap: Record<string, ComponentDoc> = {
         title: 'Progress 进度条',
         desc: '适合上传、目标完成度和流程推进状态。',
         sections: [
-            section('基础用法', '支持状态变化和从 0 到目标值的入场动画。', `<Progress :percent="68" animated />
+            section('基础用法', '支持状态变化和入场进度动画。', `<Progress :percent="68" animated />
 <Progress :percent="92" status="success" />
 <Progress :percent="35" status="warning" />`, [
                 row('percent', '当前进度百分比', 'number'),
@@ -335,9 +335,9 @@ export const docsMap: Record<string, ComponentDoc> = {
             section('基础用法', '支持半星评分、键盘选择和鼠标预览。', `<Rate v-model="score" allow-half />
 <Rate :default-value="4" />
 <Rate :default-value="2.5" allow-half disabled />`, [
-                row('modelValue', '当前评分', 'number'),
-                row('value', '兼容受控值', 'number'),
-                row('defaultValue', '默认评分', 'number', '0'),
+                row('modelValue', '当前评分（受控）', 'number'),
+                row('value', '受控兼容值', 'number'),
+                row('defaultValue', '默认初始分值', 'number', '0'),
                 row('count', '评分项数量', 'number', '5'),
                 row('allowHalf', '允许半分选择', 'boolean', 'false'),
                 row('disabled', '禁用状态', 'boolean', 'false'),
@@ -356,9 +356,9 @@ export const docsMap: Record<string, ComponentDoc> = {
     { label: '捉虫大会', value: 'bug' }
   ]"
 />`, [
-                row('modelValue', '当前值', 'string | number'),
-                row('value', '兼容受控值', 'string | number'),
-                row('defaultValue', '默认值', 'string | number'),
+                row('modelValue', '当前值（受控）', 'string | number'),
+                row('value', '受控兼容值', 'string | number'),
+                row('defaultValue', '默认初始值', 'string | number'),
                 row('options', '选项数组', 'SelectOption[]'),
                 row('placeholder', '占位文案', 'string', `'请选择'`),
                 row('disabled', '禁用状态', 'boolean', 'false'),
@@ -370,9 +370,9 @@ export const docsMap: Record<string, ComponentDoc> = {
         desc: '适合数值调节、预算分配和阈值设置。',
         sections: [
             section('基础用法', '支持步长、最小值和最大值设置。', `<Slider v-model="sliderValue" :min="0" :max="100" :step="5" />`, [
-                row('modelValue', '当前数值', 'number'),
-                row('value', '兼容受控值', 'number'),
-                row('defaultValue', '默认值', 'number', '0'),
+                row('modelValue', '当前数值（受控）', 'number'),
+                row('value', '受控兼容值', 'number'),
+                row('defaultValue', '默认初始值', 'number', '0'),
                 row('min', '最小值', 'number', '0'),
                 row('max', '最大值', 'number', '100'),
                 row('step', '步长', 'number', '1'),
@@ -382,16 +382,16 @@ export const docsMap: Record<string, ComponentDoc> = {
     },
     switch: {
         title: 'Switch 开关',
-        desc: '适合承载是否开启、是否提醒、是否展示等布尔状态切换。',
+        desc: '适合是否提醒、是否展示、是否开启等布尔状态切换。',
         sections: [
             section('基础用法', '支持 v-model:checked、不同尺寸、加载态和自定义两端文案。', `<Switch
   v-model:checked="checked"
   checked-children="开启"
   un-checked-children="关闭"
 />`, [
-                row('modelValue', '当前开关状态', 'boolean'),
-                row('checked', '兼容受控值', 'boolean'),
-                row('defaultChecked', '默认选中', 'boolean', 'false'),
+                row('modelValue', '当前开关状态（受控）', 'boolean'),
+                row('checked', '受控兼容值', 'boolean'),
+                row('defaultChecked', '默认是否开启（非受控）', 'boolean', 'false'),
                 row('size', '尺寸', `'small' | 'default'`, `'default'`),
                 row('disabled', '禁用状态', 'boolean', 'false'),
                 row('loading', '加载状态', 'boolean', 'false'),
@@ -438,9 +438,9 @@ export const docsMap: Record<string, ComponentDoc> = {
   :rows="5"
   placeholder="输入活动说明"
 />`, [
-                row('modelValue', '当前内容', 'string'),
-                row('value', '兼容受控值', 'string'),
-                row('defaultValue', '默认内容', 'string'),
+                row('modelValue', '当前内容（受控）', 'string'),
+                row('value', '受控兼容值', 'string'),
+                row('defaultValue', '默认初始内容', 'string'),
                 row('allowClear', '显示清空按钮', 'boolean', 'false'),
                 row('disabled', '禁用状态', 'boolean', 'false'),
                 row('rows', '初始行数', 'number', '4'),
@@ -473,7 +473,7 @@ export const docsMap: Record<string, ComponentDoc> = {
         title: 'Collapse 折叠面板',
         desc: '适合常见问题、帮助说明和可展开的补充信息。',
         sections: [
-            section('基础用法', '保留原有 FAQ 风格、默认展开和禁用状态。', `<Collapse
+            section('基础用法', '适合 FAQ 风格的内容折叠，支持默认展开与禁用状态。', `<Collapse
   question="什么时候可以开放岛屿？"
   answer="完成基础布置并确认时间后即可开放。"
 />`, [
@@ -486,7 +486,7 @@ export const docsMap: Record<string, ComponentDoc> = {
     },
     cursor: {
         title: 'Cursor 光标',
-        desc: '适合把某个局部区域切换为岛屿风格指针，不影响整个页面其它区域。',
+        desc: '适合为局部区域启用岛屿风格指针，不影响页面其他区域。',
         sections: [
             section('基础用法', '默认使用内置指针资源，也支持传入自定义地址与热点位置。', `<Cursor :src="cursorIconUrl" :hotspot-x="4" :hotspot-y="0">
   <Card>这个区域会使用自定义指针</Card>
@@ -501,7 +501,7 @@ export const docsMap: Record<string, ComponentDoc> = {
         title: 'Modal 弹窗',
         desc: '适合确认操作、补充说明和短流程提示。',
         sections: [
-            section('基础用法', '保持有机轮廓、明确标题层级与默认底部按钮节奏。', `<Modal v-model:open="modalOpen" title="是否发布公告" :closable="false">
+            section('基础用法', '保持有机轮廓与清晰的标题层级，支持底部操作区自定义。', `<Modal v-model:open="modalOpen" title="是否发布公告" :closable="false">
   <p>发布后所有岛民都会收到提醒。</p>
 </Modal>`, [
                 row('open', '是否打开', 'boolean'),
@@ -517,7 +517,7 @@ export const docsMap: Record<string, ComponentDoc> = {
         title: 'Divider 分割线',
         desc: '适合隔开页面段落、表单区块和卡片内容。',
         sections: [
-            section('基础用法', '保持装饰性但不喧宾夺主，适合长内容页面。', `<Divider />`, []),
+            section('基础用法', '简洁的装饰分割线，适合长内容页面的区块间隔。', `<Divider />`, []),
         ],
     },
 };

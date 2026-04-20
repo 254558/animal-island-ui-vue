@@ -7,9 +7,9 @@
 
 ## 介绍
 
-`animal-island-ui-vue` 面向内容展示、活动页面、社区互动页与轻量业务页面，提供统一的圆润轮廓、温暖配色、柔和动效与可复用组件语义。
+`animal-island-ui-vue` 是一套 Animal Island 风格的 Vue 3 组件库，提供圆润轮廓、温暖配色与柔和动效，适合内容展示、活动页面、社区互动页与轻量业务页面。
 
-当前版本已经覆盖输入、反馈、导航、展示与浮层场景，适合作为 Vue 3 项目的界面基础层。
+当前版本包含 30 个组件，覆盖输入、反馈、导航、展示与浮层场景，可直接作为 Vue 3 项目的界面基础层使用。
 
 ## 安装
 
@@ -96,47 +96,30 @@ const current = ref(1);
             ]"
         />
 
-        <Pagination
-            v-model:current="current"
-            :total="60"
-            :page-size="10"
-        />
+        <Pagination v-model:current="current" :total="60" :page-size="10" />
     </div>
 </template>
 ```
 
 ## 组件范围
 
-- `Avatar`
-- `Badge`
-- `Button`
-- `Checkbox`
-- `Descriptions`
-- `Drawer`
-- `Empty`
-- `Form`
-- `FormItem`
-- `Input`
-- `List`
-- `Message`
-- `Modal`
-- `Notification`
-- `Pagination`
-- `Popover`
-- `Progress`
-- `Radio`
-- `Rate`
-- `Select`
-- `Slider`
-- `Switch`
-- `Tabs`
-- `Tag`
-- `Textarea`
-- `Tooltip`
-- `Card`
-- `Collapse`
-- `Cursor`
-- `Divider`
+**输入**
+`Input` · `Textarea` · `Select` · `Checkbox` · `Radio` · `Switch` · `Slider` · `Rate` · `Form` · `FormItem`
+
+**反馈**
+`Button` · `Progress` · `Message` · `Notification` · `Empty`
+
+**导航**
+`Tabs` · `Pagination`
+
+**展示**
+`Avatar` · `Badge` · `Tag` · `Descriptions` · `List` · `Card` · `Collapse` · `Divider`
+
+**浮层**
+`Modal` · `Drawer` · `Popover` · `Tooltip`
+
+**通用**
+`Cursor`
 
 ## 开发
 
@@ -150,16 +133,15 @@ npm test
 
 ## 设计原则
 
-- 组件 API 优先遵循 Vue 3 的使用习惯
-- 样式统一由 Less 模块与 CSS 自定义属性管理
-- 视觉表达保持圆润、轻盈、低压迫感
+- 组件 API 对齐 Vue 3 惯用语，减少学习负担
+- 样式由 Less 模块与 CSS 自定义属性统一管理，支持运行时主题覆盖
+- 视觉风格圆润轻盈，温和而不强迫
 - 组件命名、目录结构与类型导出保持稳定
 
 ## 版权与说明
 
-- 本项目为非官方开源项目，与任天堂株式会社无任何关联、授权或合作关系。
-- 组件库中的视觉表达仅用于风格研究与界面实现练习。
-- 如有版权相关问题，可通过仓库 Issue 联系处理。
+- 本项目为个人开源项目，与任天堂株式会社无任何关联或授权。
+- 视觉风格仅作界面实现参考，如有版权问题欢迎通过仓库 Issue 联系。
 
 ## License
 
@@ -167,4 +149,4 @@ MIT
 
 ## 致谢
 
-感谢开源项目 [guokaigdg/animal-island-ui](https://github.com/guokaigdg/animal-island-ui) 提供的风格灵感与界面参考。
+本项目基于 [guokaigdg/animal-island-ui](https://github.com/guokaigdg/animal-island-ui) React版重构为Vue版。

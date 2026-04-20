@@ -25,23 +25,23 @@ const githubRepo = 'https://github.com/yanstu/animal-island-ui-vue';
 const features = [
     {
         icon: icons.nook1,
-        title: 'Animal风格',
-        desc: '有机轮廓、圆润阴影与轻微弹性反馈，把熟悉的岛屿气质带回页面。',
+        title: 'Animal 风格',
+        desc: '有机轮廓、圆润阴影与轻微弹性反馈，把熟悉的岛屿气质带进页面。',
     },
     {
         icon: icons.apps,
         title: '30 个组件',
-        desc: '覆盖输入、反馈、导航、展示与浮层场景，足够支撑常用业务页面。',
+        desc: '覆盖输入、反馈、导航、展示与浮层场景，开箱即可运转。',
     },
     {
         icon: icons.camera,
         title: '主题定制',
-        desc: '保留设计令牌能力，适合继续扩展内容页、活动页与温和风格后台。',
+        desc: 'CSS 自定义属性支持运行时换肤，覆盖几行变量即可改变全局风格。',
     },
     {
         icon: icons.recipes,
-        title: '开箱即用',
-        desc: '基于 Vue 3、TypeScript 与 Vite，接入方式直接，类型声明完整。',
+        title: '类型完备',
+        desc: 'TypeScript 类型声明完整，接入即有代码提示，减少查文档次数。',
     },
 ];
 
@@ -107,9 +107,9 @@ const current = ref(1);
                 <span class="hero-version">v0.1.0</span>
             </h1>
             <p class="hero-subtitle">
-                Animal风格的 Vue 3 组件库，基于 TypeScript + Vite 构建
+                Animal Island 风格的 Vue 3 组件库
                 <br />
-                让 Web 应用充满温暖质感
+                30 个开箱即用的温暖质感组件，基于 TypeScript + Vite 构建
             </p>
             <div class="hero-actions">
                 <Button type="primary" size="large" @click="emit('navigate', '/quick-start')">
@@ -120,7 +120,7 @@ const current = ref(1);
 
         <section class="section">
             <h2 class="section-title">特性</h2>
-            <p class="section-desc">为什么选择 animal-island-ui-vue</p>
+            <p class="section-desc">让你的产品多一点岛屿气质</p>
             <div class="feature-grid">
                 <Card v-for="feature in features" :key="feature.title" class="feature-card">
                     <img :src="feature.icon" :alt="feature.title" class="feature-icon" />
@@ -152,7 +152,7 @@ const current = ref(1);
 
         <section class="section">
             <h2 class="section-title">安装</h2>
-            <p class="section-desc">一行命令即可安装</p>
+            <p class="section-desc">5 分钟完成接入</p>
             <CodeBlock code="// 使用 npm 安装&#10;npm install animal-island-ui-vue" />
         </section>
 
@@ -160,7 +160,7 @@ const current = ref(1);
 
         <section class="section">
             <h2 class="section-title">快速上手</h2>
-            <p class="section-desc">引入组件即可使用，样式自动加载</p>
+            <p class="section-desc">按需引入或全量注册，样式随组件自动加载</p>
             <CodeBlock :code="quickStartCode" />
         </section>
 

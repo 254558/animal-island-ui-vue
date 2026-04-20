@@ -1,0 +1,66 @@
+.radio {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--animal-text-color);
+    font-family: var(--animal-font-family);
+    font-size: var(--animal-font-size-base);
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity var(--animal-motion-duration-base)
+        var(--animal-motion-ease);
+
+    &:focus-visible {
+        outline: none;
+
+        .outer {
+            box-shadow:
+                0 3px 0 0 #d4c9b4,
+                0 0 0 3px rgba(255, 204, 0, 0.18);
+        }
+    }
+}
+
+.radio-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.outer {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: 2.5px solid #c4b89e;
+    border-radius: 50%;
+    background: rgb(247, 243, 223);
+    box-shadow: 0 3px 0 0 #d4c9b4;
+    transition:
+        all var(--animal-motion-duration-base) var(--animal-motion-ease),
+        transform var(--animal-motion-duration-fast) var(--animal-motion-ease);
+}
+
+.radio-checked .outer {
+    border-color: var(--animal-primary-color);
+    background: var(--animal-primary-color-bg);
+    box-shadow: 0 3px 0 0 var(--animal-primary-color-active);
+}
+
+.inner {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--animal-primary-color-active);
+}
+
+.radio:not(.radio-disabled):active .outer {
+    transform: translateY(1px);
+}
+
+.label {
+    line-height: 1.5;
+}

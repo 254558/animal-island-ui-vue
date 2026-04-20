@@ -1,0 +1,118 @@
+.wrapper {
+    position: relative;
+    display: inline-flex;
+    width: 100%;
+    background: rgb(247, 243, 223);
+    border: 2.5px solid #c4b89e;
+    border-radius: 24px;
+    transition: all var(--animal-motion-duration-base) var(--animal-motion-ease);
+    box-shadow: 0 3px 0 0 #d4c9b4;
+
+    &:focus-within:not(.wrapper-disabled) {
+        border-color: #ffcc00;
+        box-shadow:
+            0 3px 0 0 #e0b800,
+            0 0 0 3px rgba(255, 204, 0, 0.15);
+    }
+}
+
+.wrapper-disabled {
+    background: #ece8dc;
+    border-color: #d4c9b4;
+    box-shadow: none;
+    opacity: 0.6;
+}
+
+.wrapper-error {
+    border-color: var(--animal-error-color);
+    box-shadow: 0 3px 0 0 var(--animal-error-color-active);
+}
+
+.wrapper-warning {
+    border-color: var(--animal-warning-color);
+    box-shadow: 0 3px 0 0 var(--animal-warning-color-active);
+}
+
+.textarea {
+    width: 100%;
+    min-height: 112px;
+    padding: 16px 18px 34px;
+    border: none;
+    outline: none;
+    resize: none;
+    background: transparent;
+    color: #725d42;
+    font-size: var(--animal-font-size-base);
+    font-family: var(--animal-font-family);
+    font-weight: 500;
+    line-height: 1.7;
+
+    &::placeholder {
+        color: #c4b89e;
+        font-weight: 400;
+    }
+}
+
+.resizeHandle {
+    position: absolute;
+    right: 12px;
+    bottom: 8px;
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 3px;
+    justify-content: flex-end;
+    width: 24px;
+    height: 18px;
+    cursor: ns-resize;
+    pointer-events: auto;
+
+    &[data-disabled='true'] {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+}
+
+.resizeLine {
+    display: block;
+    width: 3px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #d7cbb5 0%, #bfae8f 100%);
+
+    &:nth-child(1) {
+        height: 6px;
+    }
+
+    &:nth-child(2) {
+        height: 10px;
+    }
+
+    &:nth-child(3) {
+        height: 14px;
+    }
+}
+
+.clear {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    color: #c4b89e;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    background: transparent;
+    appearance: none;
+    transition: all var(--animal-motion-duration-fast);
+
+    &:hover {
+        color: #725d42;
+        background: rgba(114, 93, 66, 0.1);
+    }
+}

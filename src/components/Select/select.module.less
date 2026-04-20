@@ -1,0 +1,133 @@
+.select {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+}
+
+.trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: var(--animal-height-base);
+    padding: 0 18px;
+    border: 2.5px solid #c4b89e;
+    border-radius: 50px;
+    background: rgb(247, 243, 223);
+    color: #725d42;
+    font-family: var(--animal-font-family);
+    font-size: var(--animal-font-size-base);
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 3px 0 0 #d4c9b4;
+    transition: all var(--animal-motion-duration-base) var(--animal-motion-ease);
+
+    &:focus-visible {
+        outline: none;
+        box-shadow:
+            0 3px 0 0 #e0b800,
+            0 0 0 3px rgba(255, 204, 0, 0.15);
+    }
+}
+
+.trigger-open {
+    border-color: #ffcc00;
+    box-shadow:
+        0 3px 0 0 #e0b800,
+        0 0 0 3px rgba(255, 204, 0, 0.15);
+}
+
+.trigger-disabled {
+    background: #ece8dc;
+    opacity: 0.6;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.label {
+    overflow: hidden;
+    text-align: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.placeholder {
+    color: #c4b89e;
+    font-weight: 400;
+}
+
+.arrow {
+    margin-left: 12px;
+    color: #a0936e;
+    transition: transform var(--animal-motion-duration-base)
+        var(--animal-motion-ease);
+}
+
+.trigger-open .arrow {
+    transform: rotate(180deg);
+}
+
+.dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #d4c9b4;
+    border-radius: 20px;
+    background: #fdfaf0;
+    box-shadow: var(--animal-shadow-base);
+    animation: animal-select-enter 0.2s var(--animal-motion-ease);
+}
+
+.option {
+    display: block;
+    width: 100%;
+    padding: 12px 14px;
+    border: none;
+    border-radius: 14px;
+    background: transparent;
+    color: #725d42;
+    font-family: var(--animal-font-family);
+    font-size: var(--animal-font-size-base);
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    transition: background var(--animal-motion-duration-fast);
+
+    &:hover {
+        background: #f0e8d8;
+    }
+
+    &:focus-visible {
+        outline: none;
+        background: #f0e8d8;
+    }
+}
+
+.option-active {
+    background: #f0e8d8;
+}
+
+.option-selected {
+    background: #e6f9f6;
+    color: var(--animal-primary-color-active);
+}
+
+.option-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+@keyframes animal-select-enter {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

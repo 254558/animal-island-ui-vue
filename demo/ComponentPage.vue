@@ -31,6 +31,7 @@ import {
     Tag,
     Textarea,
     Tooltip,
+    Loading,
 } from '../src';
 import ApiTable from './ApiTable.vue';
 import CodeBlock from './CodeBlock.vue';
@@ -64,6 +65,7 @@ const titleModalOpen = ref(false);
 const customFooterOpen = ref(false);
 const footerlessModalOpen = ref(false);
 const textareaValue = ref('今晚 20:00 在广场集合，准备烟火大会布置。');
+const isLoadingDemo = ref(true)
 
 const currentDoc = computed(() => docsMap[props.activeKey] ?? docsMap.about);
 </script>
@@ -405,6 +407,21 @@ const currentDoc = computed(() => docsMap[props.activeKey] ?? docsMap.about);
                                     placeholder="建议补充开放时间"
                                 />
                             </div>
+                        </div>
+                    </div>
+                </template>
+                <template v-else-if="activeKey === 'loading'">
+                    <div class="demo-stack">
+                        <div class="demo-group">
+                        <div class="demo-label">默认加载动画</div>
+                        <Loading :active="true" />
+                        </div>
+                        <div class="demo-group">
+                        <div class="demo-label">点击控制显示/隐藏</div>
+                        <Button type="primary" @click="isLoadingDemo = !isLoadingDemo">
+                            {{ isLoadingDemo ? '隐藏 Loading' : '显示 Loading' }}
+                        </Button>
+                        <Loading :active="isLoadingDemo" />
                         </div>
                     </div>
                 </template>
@@ -828,7 +845,7 @@ const currentDoc = computed(() => docsMap[props.activeKey] ?? docsMap.about);
                         </Card>
                     </Cursor>
                 </template>
-
+                
                 <template v-else-if="activeKey === 'modal'">
                     <div class="demo-stack">
                         <div class="demo-group">

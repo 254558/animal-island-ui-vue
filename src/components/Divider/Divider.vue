@@ -6,7 +6,6 @@ defineOptions({
     inheritAttrs: false,
 });
 
-export interface DividerProps {}
 </script>
 
 <template>

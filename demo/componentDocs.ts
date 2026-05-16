@@ -520,4 +520,11 @@ export const docsMap: Record<string, ComponentDoc> = {
             section('基础用法', '简洁的装饰分割线，适合长内容页面的区块间隔。', `<Divider />`, []),
         ],
     },
+    'Loading': {
+        title: 'Loading 分割线',
+        desc: '加载页面',
+        sections: [
+            section('基础用法', '动森风格小岛 Loading 动画组件，带有漂浮的小岛、摇曳的树叶和游动的鱼。关闭时会从中间圆形透明扩散，露出底层内容。', `<Loading />`, []),
+        ],
+    },
 };

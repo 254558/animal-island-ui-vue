@@ -95,3 +95,6 @@ export type { PaginationProps } from './components/Pagination';
 
 export { Popover } from './components/Popover';
 export type { PopoverProps } from './components/Popover';
+
+export { Loading } from './components/Loading';
+export type { LoadingProps } from './components/Loading';

@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import { ref, watch, onMounted, onUnmounted, computed } from 'vue'
-import styles from './Loading.module.less'
+import styles from './loading.module.less'
 import gsapScript from './island/gsap.min.js?raw'
 import motionPathPlugin from './island/MotionPathPlugin.min.js?raw'
 import animationScript from './island/script.js?raw'

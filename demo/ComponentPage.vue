@@ -66,7 +66,7 @@ const titleModalOpen = ref(false);
 const customFooterOpen = ref(false);
 const footerlessModalOpen = ref(false);
 const textareaValue = ref('今晚 20:00 在广场集合，准备烟火大会布置。');
-const isLoadingDemo = ref(true)
+const isLoadingActive = ref(true)
 const replayKey = ref(0)
 
 const currentDoc = computed(() => docsMap[props.activeKey] ?? docsMap.about);
@@ -923,19 +923,28 @@ const currentDoc = computed(() => docsMap[props.activeKey] ?? docsMap.about);
                 </template>
 
                 <template v-else-if="activeKey === 'loading'">
-                    <div class="demo-stack">
-                        <div class="demo-group">
-                        <div class="demo-label">默认加载动画</div>
-                        <Loading :active="true" />
+                <div class="demo-stack">
+                    <div class="demo-group">
+                    <div class="demo-label">加载动画</div>
+                    <Card style="position: relative; height: 550px; overflow: hidden; background: #1a1a1a; border-radius: 8px;">
+                        <!-- 被遮罩的内容层：降低层级或让 Loading 的层级更高 -->
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; color: #fff; text-align: center; z-index: 1;">
+                        <h3 style="margin-bottom: 8px; color: #fff;">这是被遮罩的内容区域</h3>
+                        <p style="font-size: 13px; color: #aaa; margin: 4px 0;">当 Loading 的 active 为 true 时，黑色背景会完全挡住这里。</p>
+                        <p style="font-size: 13px; color: #aaa; margin: 4px 0;">当 active 变为 false 时，会触发酷炫的圆形扩散退出动画。</p>
                         </div>
-                        <div class="demo-group">
-                        <div class="demo-label">点击控制显示/隐藏</div>
-                        <Button type="primary" @click="isLoadingDemo = !isLoadingDemo">
-                            {{ isLoadingDemo ? '隐藏 Loading' : '显示 Loading' }}
+                        <Loading 
+                        :active="isLoadingActive" 
+                        :style="{ zIndex: 10 }" 
+                        />
+                    </Card>
+                    <div style="margin-top: 12px; display: flex; gap: 8px;">
+                        <Button type="primary" @click="isLoadingActive = !isLoadingActive">
+                        {{ isLoadingActive ? '退出' : '加载' }}
                         </Button>
-                        <Loading :active="isLoadingDemo" />
-                        </div>
                     </div>
+                    </div>
+                </div>
                 </template>
 
                 <template v-else-if="activeKey === 'typewriter'">

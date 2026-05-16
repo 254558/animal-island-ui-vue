@@ -520,11 +520,15 @@ export const docsMap: Record<string, ComponentDoc> = {
             section('基础用法', '简洁的装饰分割线，适合长内容页面的区块间隔。', `<Divider />`, []),
         ],
     },
-    'Loading': {
-        title: 'Loading 分割线',
-        desc: '加载页面',
+    loading: {
+        title: 'Loading 加载动画',
+        desc: '提供流畅的岛屿动效加载，用于页面/模块等待状态提示。',
         sections: [
-            section('基础用法', '动森风格小岛 Loading 动画组件，带有漂浮的小岛、摇曳的树叶和游动的鱼。关闭时会从中间圆形透明扩散，露出底层内容。', `<Loading />`, []),
+            section('基础用法', '默认全屏展示加载动画，通过 active 控制显示与隐藏。', `<Loading :active="true" />`, [
+            row('active', '控制加载显示/隐藏', 'boolean', 'true'),
+            row('className', '自定义样式类名', 'string'),
+            row('style', '自定义行内样式', 'CSSProperties'),
+            ]),
         ],
     },
     typewriter: {

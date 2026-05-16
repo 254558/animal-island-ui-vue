@@ -527,4 +527,16 @@ export const docsMap: Record<string, ComponentDoc> = {
             section('基础用法', '动森风格小岛 Loading 动画组件，带有漂浮的小岛、摇曳的树叶和游动的鱼。关闭时会从中间圆形透明扩散，露出底层内容。', `<Loading />`, []),
         ],
     },
+    typewriter: {
+        title: 'Typewriter 打字机',
+        desc: '打字机组件 — 按字符逐个显示文本，支持多行与 ReactNode 富内容，不改变原有样式',
+        sections: [
+            section('基础用法', '支持普通文本、HTML、颜色样式、多行结构，可控制打字速度、重新播放与完成回调。', `<Typewriter>你好，欢迎来到动物岛！</Typewriter>`, [
+                row('speed', '打字速度（毫秒）', 'number', '90'),
+                row('trigger', '重新播放触发器，值变化即重播', 'unknown', '-'),
+                row('autoPlay', '是否自动开始播放', 'boolean', 'true'),
+                row('onDone', '打字完成回调', '() => void', '-'),
+            ]),
+        ],
+    },
 };

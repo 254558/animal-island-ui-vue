@@ -32,6 +32,7 @@ import {
     Textarea,
     Tooltip,
     Loading,
+    Typewriter,
 } from '../src';
 import ApiTable from './ApiTable.vue';
 import CodeBlock from './CodeBlock.vue';
@@ -66,6 +67,7 @@ const customFooterOpen = ref(false);
 const footerlessModalOpen = ref(false);
 const textareaValue = ref('今晚 20:00 在广场集合，准备烟火大会布置。');
 const isLoadingDemo = ref(true)
+const replayKey = ref(0)
 
 const currentDoc = computed(() => docsMap[props.activeKey] ?? docsMap.about);
 </script>
@@ -407,21 +409,6 @@ const currentDoc = computed(() => docsMap[props.activeKey] ?? docsMap.about);
                                     placeholder="建议补充开放时间"
                                 />
                             </div>
-                        </div>
-                    </div>
-                </template>
-                <template v-else-if="activeKey === 'loading'">
-                    <div class="demo-stack">
-                        <div class="demo-group">
-                        <div class="demo-label">默认加载动画</div>
-                        <Loading :active="true" />
-                        </div>
-                        <div class="demo-group">
-                        <div class="demo-label">点击控制显示/隐藏</div>
-                        <Button type="primary" @click="isLoadingDemo = !isLoadingDemo">
-                            {{ isLoadingDemo ? '隐藏 Loading' : '显示 Loading' }}
-                        </Button>
-                        <Loading :active="isLoadingDemo" />
                         </div>
                     </div>
                 </template>
@@ -932,6 +919,50 @@ const currentDoc = computed(() => docsMap[props.activeKey] ?? docsMap.about);
                         <div class="demo-copy">上方内容</div>
                         <Divider />
                         <div class="demo-copy">下方内容</div>
+                    </div>
+                </template>
+
+                <template v-else-if="activeKey === 'loading'">
+                    <div class="demo-stack">
+                        <div class="demo-group">
+                        <div class="demo-label">默认加载动画</div>
+                        <Loading :active="true" />
+                        </div>
+                        <div class="demo-group">
+                        <div class="demo-label">点击控制显示/隐藏</div>
+                        <Button type="primary" @click="isLoadingDemo = !isLoadingDemo">
+                            {{ isLoadingDemo ? '隐藏 Loading' : '显示 Loading' }}
+                        </Button>
+                        <Loading :active="isLoadingDemo" />
+                        </div>
+                    </div>
+                </template>
+
+                <template v-else-if="activeKey === 'typewriter'">
+                    <div class="demo-stack">
+                        <div class="demo-group">
+                        <div class="demo-label">默认打字机</div>
+                        <Card>
+                            <Typewriter :trigger="replayKey">
+                                你好，欢迎来到动物岛！今天的天气真不错呢～
+                            </Typewriter>
+                        </Card>
+                        </div>
+                        <div class="demo-group">
+                        <div class="demo-label">快速打字 (speed=40)</div>
+                        <Card>
+                            <Typewriter :speed="40" :trigger="replayKey">
+                            <div>第一行：钓到石头了！</div>
+                            <div>第二行：竟然连这种都能钓起来...</div>
+                            <div style="color: #FD9303; font-weight: 700">第三行：继续加油吧！</div>
+                        </Typewriter>
+                        </Card>
+                        </div>
+                        <div class="demo-row">
+                        <Button type="primary" @click="replayKey++">
+                            重新播放动画
+                        </Button>
+                        </div>
                     </div>
                 </template>
             </div>

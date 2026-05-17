@@ -915,11 +915,19 @@ const currentDoc = computed(() => docsMap[props.activeKey] ?? docsMap.about);
                 </template>
 
                 <template v-else-if="activeKey === 'divider-comp'">
-                    <div class="demo-stack">
-                        <div class="demo-copy">上方内容</div>
-                        <Divider />
-                        <div class="demo-copy">下方内容</div>
-                    </div>
+                <div class="demo-stack">
+                    <div class="demo-copy">默认棕色线</div>
+                    <Divider />
+
+                    <div class="demo-copy">青色线</div>
+                    <Divider type="line-teal" />
+
+                    <div class="demo-copy">黄色线</div>
+                    <Divider type="line-yellow" />
+
+                    <div class="demo-copy">黄色波浪线</div>
+                    <Divider type="wave-yellow" />
+                </div>
                 </template>
 
                 <template v-else-if="activeKey === 'loading'">
@@ -987,7 +995,7 @@ const currentDoc = computed(() => docsMap[props.activeKey] ?? docsMap.about);
 
 <style scoped>
 .page-shell {
-    width: min(100%, 980px);
+    width: min(100%, 1200px);
     margin: 0 auto;
 }
 

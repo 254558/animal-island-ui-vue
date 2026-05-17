@@ -517,7 +517,9 @@ export const docsMap: Record<string, ComponentDoc> = {
         title: 'Divider 分割线',
         desc: '适合隔开页面段落、表单区块和卡片内容。',
         sections: [
-            section('基础用法', '简洁的装饰分割线，适合长内容页面的区块间隔。', `<Divider />`, []),
+        section('基础用法', '简洁的装饰分割线，适合长内容页面的区块间隔。', `<Divider type="line-yellow" />`, [
+            row('type', '分割线类型', 'line-brown | line-teal | line-yellow | wave-yellow', 'line-brown'),
+        ]),
         ],
     },
     loading: {

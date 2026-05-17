@@ -221,9 +221,9 @@ const currentDoc = computed(() => docsMap[props.activeKey] ?? docsMap.about);
                                 danger / ghost / loading / disabled 状态
                             </div>
                             <div class="demo-row">
-                                <Button type="primary" loading>保存中</Button>
-                                <Button danger>删除</Button>
+                                <Button danger  >删除</Button>
                                 <Button type="primary" ghost>透明强调</Button>
+                                <Button type="primary" loading>保存中</Button>
                                 <Button disabled>暂不可用</Button>
                             </div>
                         </div>
@@ -1084,7 +1084,7 @@ const currentDoc = computed(() => docsMap[props.activeKey] ?? docsMap.about);
 
 .demo-label {
     color: #a0936e;
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 500;
     letter-spacing: 0.2px;
 }
